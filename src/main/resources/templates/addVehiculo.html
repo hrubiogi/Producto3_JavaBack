@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir Vehículo</title>
+</head>
+<body>
+    <h1>Añadir Vehículo</h1>
+    <form th:action="@{/vehiculos/add}" th:object="${vehiculo}" method="post">
+        <label for="marca">Marca:</label><br>
+        <input type="text" id="marca" th:field="*{marca}"><br>
+        
+        <label for="modelo">Modelo:</label><br>
+        <input type="text" id="modelo" th:field="*{modelo}"><br>
+        
+        <label for="precio">Precio:</label><br>
+        <input type="number" id="precio" th:field="*{precio}"><br>
+        
+        <input type="submit" value="Añadir Vehículo">
+    </form>
+</body>
+</html>
