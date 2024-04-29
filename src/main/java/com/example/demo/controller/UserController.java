@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
 
+import java.security.Principal;
+import java.util.Set;
+
+import com.example.demo.entity.Alquiler;
 import com.example.demo.entity.User;
 import com.example.demo.services.UserService;
+
 
 @Controller
 public class UserController {
@@ -27,4 +32,23 @@ public class UserController {
         userService.save(user);
         return "redirect:/login";
     }
+
+    // Página de perfil del usuario
+    @GetMapping("/perfil")
+    public String perfilUsuario(Model model, Principal principal) {
+        User usuario = userService.findByUsername(principal.getName());
+        model.addAttribute("usuario", usuario);
+        return "usuario/perfil";
+    }
+
+    // Lista de alquileres del usuario
+    @GetMapping("/alquileres")
+    public String listarAlquileresDelUsuario(Model model, Principal principal) {
+        UserService userService = new UserService();
+        User usuario = userService.findByUsername(principal.getName());
+        Set<Alquiler> alquileres = usuario.getAlquileres();
+        model.addAttribute("alquileres", alquileres);
+        return "alquileres/lista";
+    }
+
 }

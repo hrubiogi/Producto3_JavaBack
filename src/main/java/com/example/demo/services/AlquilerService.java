@@ -29,4 +29,8 @@ public class AlquilerService {
     public void deleteAlquiler(Long id) {
         alquilerRepository.deleteById(id);
     }
+
+    public List<Alquiler> findAlquileresByUsuario() {
+        return alquilerRepository.findAll();
+    }
 }

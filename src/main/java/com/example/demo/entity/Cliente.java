@@ -9,6 +9,10 @@ import lombok.Data;
 
 public class Cliente {
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clienteId;
     private String firstName;

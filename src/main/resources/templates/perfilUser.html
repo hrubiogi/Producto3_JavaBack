@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Perfil del Usuario</title>
+</head>
+<body>
+    <h1>Perfil de Usuario</h1>
+    <p>Nombre: <span th:text="${user.nombre}"></span></p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+    <a th:href="@{/user/alquileres}">Ver mis alquileres</a>
+</body>
+</html>

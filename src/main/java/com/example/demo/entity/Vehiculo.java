@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.Set;
 
 @Data
 @Entity
@@ -50,6 +51,8 @@ public class Vehiculo {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-    
+
+	@OneToMany(mappedBy = "Vehiculo")
+    private Set<Alquiler> alquileres;
     
 }

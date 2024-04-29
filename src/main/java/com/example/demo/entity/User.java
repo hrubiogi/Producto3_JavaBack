@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Entity
@@ -106,4 +107,20 @@ public class User {
                ", fechaCreación=" + fechaCreación +
                '}';
     }
+
+    @OneToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<Alquiler> alquileres;
+
+    public Set<Alquiler> getAlquileres() {
+        return alquileres;
+    }
+
+    public void setAlquileres(Set<Alquiler> alquileres) {
+        this.alquileres = alquileres;
+    }
+
 }

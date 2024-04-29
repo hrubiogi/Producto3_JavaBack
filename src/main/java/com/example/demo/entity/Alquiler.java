@@ -30,6 +30,14 @@ public class Alquiler {
     @Temporal(TemporalType.DATE) // Especifica el tipo de temporalidad para la fecha
     private Date fechaFin;
 
+    @Column(name = "costo") // Nombre de la columna en la base de datos para la fecha de fin
+    @Temporal(TemporalType.DATE) // Especifica el tipo de temporalidad para la fecha
+    private Integer costo;
+
+    @Column(name = "usuario")
+    @JoinColumn(name = "usuario")
+    private User user;
+
     // Otros atributos y métodos getter/setter
 
 }

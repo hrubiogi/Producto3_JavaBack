@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.entity.Alquiler;
 import com.example.demo.services.AlquilerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +18,10 @@ public class AlquilerController {
     private AlquilerService alquilerService;
 
     @GetMapping
-    public List<Alquiler> getAllAlquileres() {
-        return alquilerService.getAlquileres();
+    public String listarAlquileres(Model model, Principal principal) {
+        List<Alquiler> alquileres = alquilerService.findAlquileresByUsuario();
+        model.addAttribute("alquileres", alquileres);
+        return "alquileres/lista";
     }
 
     @GetMapping("/{alquilerId}")
@@ -26,8 +30,9 @@ public class AlquilerController {
     }
 
     @PostMapping
-    public void saveOrUpdateAlquiler(@RequestBody Alquiler alquiler) {
+    public String guardarAlquiler(@ModelAttribute("alquiler") Alquiler alquiler, Principal principal) {
         alquilerService.saveOrUpdateAlquiler(alquiler);
+        return "redirect:/user/alquileres";
     }
 
     @DeleteMapping("/{alquilerId}")

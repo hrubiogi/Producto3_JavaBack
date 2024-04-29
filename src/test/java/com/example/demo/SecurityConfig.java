@@ -10,20 +10,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-          .authorizeHttpRequests(authorize -> authorize
-              .anyRequest().authenticated()
+           .authorizeHttpRequests(authorize -> authorize
+                .antMatchers("/admin/admin_pages").hasRole("ADMIN")
+                .antMatchers("/user/user_pages").authenticated()
+            )  
+           .formLogin(form -> form
+               .loginPage("/login")
+               .permitAll()
             )
-          .formLogin()
-          .and()
-          .csrf().disable()
-          .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
-          .and()
-          .formLogin()
-          .loginPage("/login")
-          .permitAll()
-          .and()
-          .logout()
-          .logoutSuccessUrl("/")
-          .permitAll();
+           .logout(logout -> logout
+               .logoutSuccessUrl("/")
+               .permitAll()
+            );
     }
+    
 }
